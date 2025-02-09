@@ -10,6 +10,8 @@ import webbrowser
 from song_finder import fetch_lyrics
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import requests
+import urllib.parse
 
 # Global variable to store relative path information
 scripts_folder = os.path.dirname(__file__)
@@ -220,3 +222,17 @@ def select_song(matching_songs):
                     print("Invalid index. Please enter a valid index.")
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
+
+def lyricsgenius_multi_search(search):
+    url = "https://genius.com/api/search/multi"
+
+    querystring = {"per_page":"5","q":urllib.parse.quote_plus(search)}
+
+    headers = {
+        'Cache-Control': "no-cache",
+    }
+
+    print(f"Making web request to {url}?per_page={querystring['per_page']}&q={querystring['q']}")
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    return response.text
