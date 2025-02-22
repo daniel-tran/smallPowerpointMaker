@@ -1,7 +1,7 @@
 import os, sys
 from bible_passage import bible_passage_auto
 from slide_builders import create_from_template, create_bulletin_slide, create_offering_slide, create_starting_slides, create_title_and_text_slide, create_title_slide, add_title_with_image_on_right, append_song_to_powerpoint
-from helpers import get_next_sunday_auto, kill_powerpoint, find_song_names, parse_roster_row, is_running_in_ci
+from helpers import get_next_sunday_auto, kill_powerpoint, find_song_names, parse_roster_row, is_running_in_ci, get_spreadsheet_to_csv_file
 import PIL
 from fuzzywuzzy import process
 from song_finder import fetch_lyrics_auto
@@ -25,6 +25,12 @@ def main():
     Prayer points
     Mingle time slide
     '''
+    output_csv = f"{os.path.dirname(__file__)}/secret-page.csv"
+    get_spreadsheet_to_csv_file(os.environ.get("HIDDEN_URL"), output_csv)
+    with open(output_csv, encoding='utf-8-sig') as file:
+        print('File contents:')
+        print(file.read())
+    return
 
     print("Starting auto-script...")
     font_sizes_large = {'title': 40, 'song': 27, 'bible reading': 23, 'tithing': 16}
