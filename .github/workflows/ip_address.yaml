@@ -1,4 +1,4 @@
-name: Create PowerPoint in standalone branch
+name: IP address info
 
 permissions:
   contents: write  # <-- This is what gives the GitHub Actions bot push rights
