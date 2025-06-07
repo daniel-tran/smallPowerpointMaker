@@ -25,3 +25,7 @@ jobs:
         run: |
           ipconfig
           where netsh
+      - name: Print IP interfaces
+        run: |
+          powershell -Command "Get-NetIPInterface"
+          where netsh
