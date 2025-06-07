@@ -31,6 +31,8 @@ jobs:
           where netsh
       - name: Change IP interfaces
         run: |
+          powershell -Command "New-NetIPAddress -InterfaceIndex 14 -IPAddress 192.168.0.42"
           powershell -Command "Set-NetIPAddress -InterfaceIndex 14 -IPAddress 192.168.0.42 -PrefixLength 16 -PreferredLifetime (New-TimeSpan -Days 1)"
+          powershell -Command "New-NetIPAddress -InterfaceIndex 10 -IPAddress 172.20.16.7"
           powershell -Command "Set-NetIPAddress -InterfaceIndex 10 -IPAddress 172.20.16.7 -PrefixLength 20 -PreferredLifetime (New-TimeSpan -Days 1)"
           ipconfig
